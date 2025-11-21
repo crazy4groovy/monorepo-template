@@ -99,6 +99,20 @@ cd <workspace-directory>
 pnpm vitest run -t "<test name>"
 ```
 
+### Run Test Coverage
+
+```bash
+# From root - run test coverage for all workspaces
+pnpm test:coverage
+
+# Run test coverage for specific workspace using turbo filter
+pnpm turbo run test:coverage --filter <workspace-name>
+
+# Or from workspace directory
+cd apps/react-app
+pnpm test:coverage
+```
+
 ### Testing Requirements
 
 - **Always run tests before committing**: `pnpm test`

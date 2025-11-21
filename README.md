@@ -47,6 +47,7 @@ Run from the root directory to execute across all workspaces:
 - `pnpm lint` - Run linting across all workspaces
 - `pnpm lint:fix` - Auto-fix linting issues across all workspaces
 - `pnpm test` - Run tests across all workspaces
+- `pnpm test:coverage` - Run test coverage for all workspaces
 - `pnpm knip` - Run code quality checks (unused dependencies, dead code, etc.)
 - `pnpm analyze` - Analyze bundle sizes for Vite apps (generates `dist/stats.html` visualization)
 
@@ -66,6 +67,7 @@ pnpm lint         # Run ESLint
 pnpm lint:fix      # Auto-fix ESLint issues
 pnpm test         # Run Vitest tests
 pnpm test:watch    # Run Vitest in watch mode
+pnpm test:coverage # Run Vitest with coverage report
 pnpm knip         # Check for unused code/dependencies
 ```
 
@@ -110,6 +112,7 @@ pnpm lint:fix      # Auto-fix ESLint issues
 pnpm typecheck     # Type check without emitting files
 pnpm test         # Run Vitest tests
 pnpm test:watch    # Run Vitest in watch mode
+pnpm test:coverage # Run Vitest with coverage report
 pnpm knip         # Check for unused code/dependencies
 ```
 
@@ -124,6 +127,7 @@ pnpm lint:fix      # Auto-fix ESLint issues
 pnpm typecheck     # Type check without emitting files
 pnpm test         # Run Vitest tests
 pnpm test:watch    # Run Vitest in watch mode
+pnpm test:coverage # Run Vitest with coverage report
 pnpm knip         # Check for unused code/dependencies
 ```
 

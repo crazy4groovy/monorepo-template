@@ -11,6 +11,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,scss,md,astro,svelte}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,css,scss,md,astro,svelte}\"",
     "test": "turbo run test",
+    "test:coverage": "turbo run test:coverage",
     "knip": "turbo run knip",
     "analyze": "turbo run analyze"
   },
