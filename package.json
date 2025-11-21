@@ -11,18 +11,25 @@
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,scss,md,astro,svelte}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,css,scss,md,astro,svelte}\"",
     "test": "turbo run test",
-    "knip": "turbo run knip"
+    "knip": "turbo run knip",
+    "analyze": "turbo run analyze"
   },
   "devDependencies": {
     "prettier": "^3.6.2",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-svelte": "^3.4.0",
+    "rollup-plugin-visualizer": "^6.0.5",
     "turbo": "^2.6.1",
     "typescript": "^5.9.3"
   },
   "packageManager": "pnpm@8.15.0",
   "engines": {
-    "node": ">=24.0.0",
+    "node": ">=22.0.0",
     "pnpm": ">=8.0.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
   }
 }

@@ -48,6 +48,7 @@ Run from the root directory to execute across all workspaces:
 - `pnpm lint:fix` - Auto-fix linting issues across all workspaces
 - `pnpm test` - Run tests across all workspaces
 - `pnpm knip` - Run code quality checks (unused dependencies, dead code, etc.)
+- `pnpm analyze` - Analyze bundle sizes for Vite apps (generates `dist/stats.html` visualization)
 
 ### Individual Workspaces
 
@@ -59,6 +60,7 @@ Each workspace supports the following commands:
 cd apps/react-app
 pnpm dev          # Start Vite dev server (default: http://localhost:5173)
 pnpm build        # Build for production
+pnpm analyze      # Build and generate bundle size visualization (dist/stats.html)
 pnpm preview      # Preview production build
 pnpm lint         # Run ESLint
 pnpm lint:fix      # Auto-fix ESLint issues
@@ -73,6 +75,7 @@ pnpm knip         # Check for unused code/dependencies
 cd apps/svelte-app
 pnpm dev          # Start Vite dev server
 pnpm build        # Build for production
+pnpm analyze      # Build and generate bundle size visualization (dist/stats.html)
 pnpm preview      # Preview production build
 pnpm lint         # Run ESLint (supports .svelte files)
 pnpm lint:fix      # Auto-fix ESLint issues
@@ -164,6 +167,17 @@ All projects have Knip configured to detect:
 - Dead code
 
 Configuration files: `knip.config.ts` in each project root.
+
+### Bundle Analysis
+
+Vite-based apps (React and Svelte) include bundle size visualization:
+
+- **Command**: `pnpm analyze` (root) or `pnpm analyze` from app directory
+- **Output**: `dist/stats.html` - Interactive treemap visualization
+- **Features**: Shows bundle sizes, gzip sizes, and brotli sizes
+- **Usage**: Build the app, then open `dist/stats.html` in your browser to explore bundle composition
+
+The visualizer uses `rollup-plugin-visualizer` and only runs during production builds.
 
 ### Environment Variables
 
@@ -525,6 +539,7 @@ pnpm dev
 - `pnpm knip` - Find unused code/dependencies (all projects have `knip.config.ts`)
 - `pnpm lint` - Check for linting issues
 - `pnpm lint:fix` - Auto-fix linting issues
+- `pnpm analyze` - Analyze bundle sizes for Vite apps (React, Svelte) - generates `dist/stats.html`
 
 ### File Structure Patterns
 

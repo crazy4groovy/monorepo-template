@@ -6,16 +6,10 @@ This folder contains test configuration and setup utilities for package1.
 
 ### `packages/package1/src/test/setup.ts`
 
-Test configuration file that loads environment variables.
+Test configuration file for Vitest test setup.
 
 **Exports**: None (side effects only)
 
-**Functions**:
+**Functions**: None (currently empty, reserved for future test configuration)
 
-- Imports `dotenv/config` to load environment variables from `.env` file
-
-**Gotchas**:
-
-- Must be imported before any code that uses `process.env`
-- Loads environment variables for test environment
-- Used by `packages/package1/src/index.ts` `formatCurrency` function which reads `DEFAULT_CURRENCY` and `DEFAULT_LOCALE`
+**Gotchas**: None

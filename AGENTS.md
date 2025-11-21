@@ -116,12 +116,16 @@ pnpm vitest run -t "<test name>"
 
 ### Prettier Configuration
 
-- **Semicolons**: Required (`semi: true`)
+- **Semicolons**: Disabled (`semi: false`)
 - **Quotes**: Single quotes (`singleQuote: true`)
 - **Print width**: 100 characters (`printWidth: 100`)
 - **Tab width**: 2 spaces (`tabWidth: 2`)
+- **Use tabs**: Disabled (`useTabs: false`)
 - **Trailing commas**: ES5 style (`trailingComma: "es5"`)
+- **Arrow parens**: Always (`arrowParens: "always"`)
 - **End of line**: LF (`endOfLine: "lf"`)
+- **Plugins**: Includes `prettier-plugin-astro` and `prettier-plugin-svelte` for framework-specific formatting
+- **Overrides**: Custom parsers for `.astro` and `.svelte` files
 
 ### Format Commands
 

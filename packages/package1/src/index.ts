@@ -22,9 +22,9 @@ export function multiply(a: number, b: number): number {
  */
 export function formatCurrency(
   amount: number,
-  currency: string = process.env.DEFAULT_CURRENCY || 'USD'
+  currency: string = 'USD',
+  locale: string = 'en-US'
 ): string {
-  const locale = process.env.DEFAULT_LOCALE || 'en-US'
   return new Intl.NumberFormat(locale, {
     style: 'currency',
     currency,
