@@ -1,0 +1,39 @@
+# Dependencies
+node_modules
+**/node_modules
+
+# Build outputs
+dist
+build
+.next
+.astro
+**/dist
+**/build
+**/.next
+**/.astro
+
+# Lock files
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode
+.idea
+
+# TypeScript build info
+*.tsbuildinfo
+
+# Coverage
+coverage
+.nyc_output
+
+# Turbo
+.turbo
