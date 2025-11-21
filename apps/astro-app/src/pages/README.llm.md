@@ -15,28 +15,34 @@ Home page that displays environment variables and demonstrates package1 utilitie
 **Component Props**: None (page component)
 
 **Dependencies**:
+
 - `apps/astro-app/src/layouts/Layout.astro` - Uses Layout component
 - `package1` - Uses `add`, `capitalize`, `formatCurrency` utilities
 
 **Environment Variables**:
+
 - `PUBLIC_APP_NAME` - Application name (default: 'Astro App')
 - `PUBLIC_API_URL` - API URL (default: 'http://localhost:3000')
 - `MODE` - Environment name (default: 'development')
 
 **Frontmatter**:
+
 - Imports Layout component
 - Imports package1 utilities
 - Reads environment variables
 
 **Template**:
+
 - Wraps content in Layout component
 - Displays app name, environment info, and package1 utility examples
 
 **Styles**:
+
 - Scoped styles for main content area
 - Styles for `.info-box` class
 
 **Gotchas**:
+
 - Environment variables must be prefixed with `PUBLIC_` to be accessible in the browser
 - Uses `MODE` instead of custom env var for environment name
 - Styles are scoped to this component (not global)

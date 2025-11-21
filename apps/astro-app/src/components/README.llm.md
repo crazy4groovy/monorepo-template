@@ -9,21 +9,26 @@ React components used in the Astro application.
 Simple counter component with increment and decrement buttons.
 
 **Exports**:
+
 - `Counter` (default) - React functional component
 
 **Component Props**: None
 
 **State**:
+
 - `count` (number) - Current count value, initialized to 0
 
 **Functions**:
+
 - Increment handler: `() => setCount(count + 1)`
 - Decrement handler: `() => setCount(count - 1)`
 
 **Dependencies**:
+
 - `react` - Uses `useState` hook
 
 **Gotchas**:
+
 - Uses React hooks (must be used in React components, not Astro components directly)
 - State is local to component instance
 

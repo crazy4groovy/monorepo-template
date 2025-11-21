@@ -11,6 +11,7 @@ Express application entry point that sets up routes and starts the server.
 **Exports**: None (side effects only - starts server)
 
 **Functions**:
+
 - Creates Express app instance
 - Configures JSON middleware
 - Defines routes
@@ -18,27 +19,32 @@ Express application entry point that sets up routes and starts the server.
 - Handles graceful shutdown
 
 **Routes**:
+
 - `GET /` - Returns welcome message with app info and package1 utility examples
   - Response: `{ message: string, version: string, example: { capitalize: string, add: number, currency: string } }`
 - `GET /health` - Health check endpoint
   - Response: `{ status: 'ok' }`
 
 **Environment Variables**:
+
 - `PORT` - Server port (default: 3000)
 - `APP_NAME` - Application name (default: 'Express Service')
 - `API_VERSION` - API version (default: 'v1')
 
 **Dependencies**:
+
 - `express` - Express web framework
 - `dotenv/config` - Loads environment variables
 - `package1` - Uses `add`, `capitalize`, `formatCurrency` utilities
 
 **Server Lifecycle**:
+
 - Listens on configured PORT
 - Handles `SIGTERM` signal for graceful shutdown
 - Handles `SIGINT` signal (Ctrl+C) for graceful shutdown
 
 **Gotchas**:
+
 - Uses `dotenv/config` import to load environment variables automatically
 - Server instance is stored for graceful shutdown handling
 - Health check endpoint returns simple status object

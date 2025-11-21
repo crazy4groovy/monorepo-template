@@ -214,6 +214,20 @@ When you make changes to `package1`:
 - **In development** (`pnpm watch`): Changes are instantly reflected - no rebuild needed!
 - **For production builds**: Run `pnpm build` to compile packages before building dependent apps
 
+### Dependency Version Conventions
+
+This monorepo follows a specific versioning strategy for dependencies:
+
+- **Production dependencies** (`dependencies`): Use tilde (`~`) to allow only patch-level updates
+  - Example: `"react": "~19.2.0"` allows `19.2.x` but not `19.3.0` or `20.0.0`
+  - This provides stability for production dependencies while still receiving bug fixes
+
+- **Development dependencies** (`devDependencies`): Use caret (`^`) to allow minor and patch updates
+  - Example: `"typescript": "^5.9.3"` allows `5.9.x`, `5.10.x`, etc., but not `6.0.0`
+  - This allows dev tools to stay current with new features and improvements
+
+**Rationale**: Production dependencies need more stability, while dev dependencies can be more flexible to take advantage of tooling improvements.
+
 ## Turborepo
 
 This monorepo uses [Turborepo v2](https://turbo.build/) for:
