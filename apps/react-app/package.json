@@ -18,11 +18,13 @@
     "knip": "knip"
   },
   "dependencies": {
+    "@tanstack/react-router": "~1.139.1",
     "package1": "workspace:*",
     "react": "~19.2.0",
     "react-dom": "~19.2.0"
   },
   "devDependencies": {
+    "@tanstack/router-plugin": "~1.139.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
     "@types/react": "^19.2.6",

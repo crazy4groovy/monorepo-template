@@ -34,5 +34,8 @@
     "knip": "^5.70.1",
     "typescript": "^5.9.3",
     "vitest": "^1.6.1"
+  },
+  "dependencies": {
+    "@tanstack/react-router": "^1.139.1"
   }
 }

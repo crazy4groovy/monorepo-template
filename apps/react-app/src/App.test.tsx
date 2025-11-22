@@ -1,21 +1,32 @@
 import { describe, expect, it } from 'vitest'
 import { render, screen } from '@testing-library/react'
-import App from './App'
+import { RouterProvider, createMemoryHistory, createRouter } from '@tanstack/react-router'
+import { routeTree } from './routeTree.gen'
 import { add, capitalize, formatCurrency } from 'package1'
 
-describe('App', () => {
+const createTestRouter = () => {
+  const history = createMemoryHistory({
+    initialEntries: ['/'],
+  })
+  return createRouter({ routeTree, history })
+}
+
+describe('Home Route', () => {
   it('should render the app title', () => {
-    render(<App />)
+    const router = createTestRouter()
+    render(<RouterProvider router={router} />)
     expect(screen.getByText('React App')).toBeInTheDocument()
   })
 
   it('should render welcome message', () => {
-    render(<App />)
+    const router = createTestRouter()
+    render(<RouterProvider router={router} />)
     expect(screen.getByText(/Welcome to the React app in the monorepo!/)).toBeInTheDocument()
   })
 
   it('should display package1 utilities', () => {
-    render(<App />)
+    const router = createTestRouter()
+    render(<RouterProvider router={router} />)
     expect(screen.getByText(/Using package1 utilities:/)).toBeInTheDocument()
     expect(screen.getByText(/Capitalize: Hello world/)).toBeInTheDocument()
     expect(screen.getByText(/Add: 5 \+ 3 = 8/)).toBeInTheDocument()
