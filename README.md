@@ -207,6 +207,28 @@ All projects use strict TypeScript configuration:
 - `noUnusedParameters: true`
 - `noFallthroughCasesInSwitch: true`
 
+**Type Definitions:**
+
+- **Prefer `type` over `interface`**: Use `type` for type definitions instead of `interface`
+  - Avoids inheritance complexity (`extends`)
+  - Easier combination logic (unions, intersections)
+  - Better for function types and utility types
+  - More consistent with modern TypeScript patterns
+
+```typescript
+// Preferred
+type ComponentProps = {
+  userId: string
+  onSuccess?: () => void
+}
+
+// Avoid
+interface ComponentProps {
+  userId: string
+  onSuccess?: () => void
+}
+```
+
 ## Development Workflow
 
 1. **Install dependencies**: `pnpm install`
@@ -584,7 +606,7 @@ For large React components, use the `useProps` pattern to separate business logi
 // Component.tsx - Presentation component
 import { useProps } from "./useProps";
 
-interface ComponentProps {
+type ComponentProps = {
   userId: string;
   onSuccess?: () => void;
 }
