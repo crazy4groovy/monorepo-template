@@ -18,6 +18,10 @@ module.exports = {
 					typescript: '@typescript-eslint/parser',
 				},
 			},
+			rules: {
+				// Disable type-aware rules for Svelte files as they require type information
+				'@typescript-eslint/consistent-type-imports': 'off',
+			},
 		},
 	],
 	parser: '@typescript-eslint/parser',

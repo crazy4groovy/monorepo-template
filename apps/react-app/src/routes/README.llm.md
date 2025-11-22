@@ -5,6 +5,7 @@ This directory contains all route definitions for the React app using TanStack R
 ## File-Based Routing
 
 TanStack Router uses file-based routing where:
+
 - File names determine route paths
 - `__root.tsx` creates the root route and layout
 - `index.tsx` creates the `/` route

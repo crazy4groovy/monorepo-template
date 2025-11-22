@@ -1,4 +1,4 @@
-import { createRootRoute, Link, Outlet } from '@tanstack/react-router'
+import { Link, Outlet, createRootRoute } from '@tanstack/react-router'
 
 export const Route = createRootRoute({
   component: () => (
@@ -16,21 +16,21 @@ export const Route = createRootRoute({
         }}
       >
         <Link
-          to="/"
           style={{
             marginRight: '1rem',
             textDecoration: 'none',
             color: '#007bff',
           }}
+          to="/"
         >
           Home
         </Link>
         <Link
-          to="/about"
           style={{
             textDecoration: 'none',
             color: '#007bff',
           }}
+          to="/about"
         >
           About
         </Link>
