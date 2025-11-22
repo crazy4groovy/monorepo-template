@@ -229,6 +229,42 @@ interface ComponentProps {
 }
 ```
 
+### Clean Code Principles
+
+Follow Uncle Bob's Clean Code best practices for maintainable, readable code:
+
+**Function Design:**
+
+- **Small functions**: Functions should do one thing well and be small enough to understand at a glance
+- **Single Responsibility**: Each function should have a single, well-defined purpose
+- **Appropriate abstraction levels**: Functions should operate at a single level of abstraction
+- **Avoid deep nesting**: Prefer early returns and guard clauses over nested conditionals
+
+**Naming:**
+
+- **Descriptive names**: Use clear, intention-revealing names that explain what code does
+- **Avoid abbreviations**: Prefer `calculateTotalPrice` over `calcTot` or `ctp`
+- **Consistent vocabulary**: Use the same terms for the same concepts throughout the codebase
+- **Searchable names**: Avoid magic numbers and single-letter variables (except in loops)
+
+**Code Organization:**
+
+- **DRY (Don't Repeat Yourself)**: Extract common logic into reusable functions
+- **Separation of concerns**: Separate business logic from presentation and infrastructure
+
+**Testing:**
+
+- **Unit tests**: Write unit tests for business logic, start with happy paths and expected exceptions.
+- **Test coverage**: Aim for high test coverage, especially for critical paths
+- **Test readability**: Tests should be readable and serve as documentation
+- **Test isolation**: Tests should be independent and not rely on shared state
+
+**Code Quality:**
+
+- **Readability over cleverness**: Prefer clear, straightforward code over clever optimizations
+- **Comments when needed**: Code should be self-documenting; add comments only when necessary to explain "why", "gotchas", or system architecture.
+- **Refactor fearlessly**: Continuously improve code quality through refactoring.
+
 ## Development Workflow
 
 1. **Install dependencies**: `pnpm install`
