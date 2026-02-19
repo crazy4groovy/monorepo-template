@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import { RouterProvider, createMemoryHistory, createRouter } from '@tanstack/react-router'
 import { routeTree } from './routeTree.gen'
 import { add, capitalize, formatCurrency } from 'package1'
@@ -12,24 +12,30 @@ const createTestRouter = () => {
 }
 
 describe('Home Route', () => {
-  it('should render the app title', () => {
+  it('should render the app title', async () => {
     const router = createTestRouter()
     render(<RouterProvider router={router} />)
-    expect(screen.getByText('React App')).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.getByText('React App')).toBeInTheDocument()
+    })
   })
 
-  it('should render welcome message', () => {
+  it('should render welcome message', async () => {
     const router = createTestRouter()
     render(<RouterProvider router={router} />)
-    expect(screen.getByText(/Welcome to the React app in the monorepo!/)).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.getByText(/Welcome to the React app in the monorepo!/)).toBeInTheDocument()
+    })
   })
 
-  it('should display package1 utilities', () => {
+  it('should display package1 utilities', async () => {
     const router = createTestRouter()
     render(<RouterProvider router={router} />)
-    expect(screen.getByText(/Using package1 utilities:/)).toBeInTheDocument()
-    expect(screen.getByText(/Capitalize: Hello world/)).toBeInTheDocument()
-    expect(screen.getByText(/Add: 5 \+ 3 = 8/)).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.getByText(/Using package1 utilities:/)).toBeInTheDocument()
+      expect(screen.getByText(/Capitalize: Hello world/)).toBeInTheDocument()
+      expect(screen.getByText(/Add: 5 \+ 3 = 8/)).toBeInTheDocument()
+    })
   })
 })
 
