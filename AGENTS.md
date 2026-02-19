@@ -1,245 +1,82 @@
 # AGENTS.md
 
-This file provides context and instructions for AI coding agents working on this monorepo project.
+This file provides context and instructions for AI coding agents working on this monorepo project. Your role is to build, validate, and ship autonomously.
 
 ## Project Overview
 
-This is a monorepo template using pnpm workspaces and Turborepo v2. It contains:
+Monorepo using pnpm workspaces and Turborepo v2:
 
-- **Apps**: React app, Svelte app, and Astro app
-- **Services**: Express API service
-- **Packages**: Shared utility package (`package1`)
+- **Apps**: React, Svelte, Astro
+- **Services**: Express API
+- **Packages**: Shared utility (`package1`)
 
-All projects use TypeScript and share a common Prettier configuration. Eslint rules are unique per project.
+All projects use TypeScript. Prettier config at root (`.prettierrc`). ESLint rules are unique per project.
 
-## Setup Commands
+**Prerequisites**: Node.js >=22.0.0, pnpm >=8.0.0. Run `pnpm install` to install all workspace dependencies.
 
-### Initial Setup
+## Agentic Workflow
 
-```bash
-# Install all dependencies for all workspaces
-pnpm install
-```
+Every change must go through a validation loop. Do not make large changes without self-validating along the way — largely without waiting for human review of intermediate steps.
 
-### Prerequisites
+## Validation Loop
 
-- **Node.js**: >=24.0.0
-- **pnpm**: >=8.0.0
+For every feature, fix, or refactor:
 
-## Build Commands
+1. **Clarify outcome** — Understand what "done" looks like. State assumptions if requirements are ambiguous.
+2. **Write tests first** — Add tests that fail without the change.
+3. **Implement** — Write minimal code to satisfy requirements and make tests pass.
+4. **Validate** — Run checks from the workspace you modified:
+   ```bash
+   pnpm test && pnpm lint && pnpm build
+   ```
+   For cross-workspace or shared package changes, run from root.
+5. **Iterate** — Fix failures and re-run. If code becomes messy, revert and try a different approach.
 
-### Root Level (All Workspaces)
+## Testing Requirements
 
-```bash
-# Build all packages and applications
-pnpm build
+- Write tests before implementing features
+- Write tests that reproduce bugs before fixing them
+- Run `pnpm test` before committing
+- Run targeted tests for fast feedback:
+  ```bash
+  pnpm turbo run test --filter <workspace-name>
+  ```
 
-# Start development mode for all applications
-pnpm dev
+## Linting Requirements
 
-# Start development mode with file watching (recommended for package updates)
-pnpm watch
-```
+- Run `pnpm lint` before committing
+- Fix all linting errors before merging
 
-### Individual Workspaces
+## Code Style
 
-```bash
-# React App
-cd apps/react-app
-pnpm build
+- Use Prettier for formatting (configured at root). Key settings that affect how you write code:
+  - **No semicolons** (`semi: false`)
+  - **Single quotes** (`singleQuote: true`)
+  - **100 char print width** (`printWidth: 100`)
+  - **Trailing commas ES5** (`trailingComma: "es5"`)
+  - **LF line endings** (`endOfLine: "lf"`)
+- Use TypeScript with strict mode
+- Avoid `any` types
+- Use functional patterns, camelCase/PascalCase naming
+- Group imports (external, internal, relative)
 
-# Svelte App
-cd apps/svelte-app
-pnpm build
-
-# Astro App
-cd apps/astro-app
-pnpm build
-
-# Express Service
-cd services/express-service
-pnpm build
-
-# Shared Package
-cd packages/package1
-pnpm build
-```
-
-## Testing Instructions
-
-### Run All Tests
+## Before Committing
 
 ```bash
-# From root - run tests for all workspaces
-pnpm test
+pnpm format:check && pnpm lint && pnpm test
 ```
 
-### Run Tests for Specific Workspace
+## README.llm.md Maintenance
 
-```bash
-# Using turbo filter
-pnpm turbo run test --filter <workspace-name>
+Each `src` subfolder contains a `README.llm.md` file documenting modules, classes, exported functions, components, and relationships.
 
-# Or from workspace directory
-cd apps/react-app
-pnpm test
-```
+**Update README.llm.md when you**:
 
-### Run Tests in Watch Mode
+- Add, modify, or remove modules/classes/functions
+- Change relationships between modules
+- Update type definitions or interfaces
 
-```bash
-cd <workspace-directory>
-pnpm test:watch
-```
-
-### Run Specific Test
-
-```bash
-cd <workspace-directory>
-pnpm vitest run -t "<test name>"
-```
-
-### Run Test Coverage
-
-```bash
-# From root - run test coverage for all workspaces
-pnpm test:coverage
-
-# Run test coverage for specific workspace using turbo filter
-pnpm turbo run test:coverage --filter <workspace-name>
-
-# Or from workspace directory
-cd apps/react-app
-pnpm test:coverage
-```
-
-### Testing Requirements
-
-- **Always run tests before committing**: `pnpm test`
-- **Add or update tests** for any code changes, even if not explicitly requested
-- **Ensure all tests pass** before merging changes
-- **Resolve any test or type errors** until the entire suite passes
-
-## Code Style Guidelines
-
-### Formatting
-
-- **Use Prettier** for all code formatting
-- **Format on save** is enabled in VS Code workspace settings
-- **Shared config**: `.prettierrc` at root applies to all workspaces
-
-### Prettier Configuration
-
-- **Semicolons**: Disabled (`semi: false`)
-- **Quotes**: Single quotes (`singleQuote: true`)
-- **Print width**: 100 characters (`printWidth: 100`)
-- **Tab width**: 2 spaces (`tabWidth: 2`)
-- **Use tabs**: Disabled (`useTabs: false`)
-- **Trailing commas**: ES5 style (`trailingComma: "es5"`)
-- **Arrow parens**: Always (`arrowParens: "always"`)
-- **End of line**: LF (`endOfLine: "lf"`)
-- **Plugins**: Includes `prettier-plugin-astro` and `prettier-plugin-svelte` for framework-specific formatting
-- **Overrides**: Custom parsers for `.astro` and `.svelte` files
-
-### Format Commands
-
-```bash
-# Format all files
-pnpm format
-
-# Check formatting without making changes
-pnpm format:check
-
-# Format from any subproject
-cd apps/react-app
-pnpm format
-```
-
-### TypeScript
-
-- **Strict mode**: Enabled in all `tsconfig.json` files
-- **Use TypeScript** for all new code
-- **Type everything**: Avoid `any` types when possible
-
-### Code Conventions
-
-- **Functional programming**: Prefer functional patterns where appropriate
-- **Consistent naming**: Use camelCase for variables/functions, PascalCase for components/classes
-- **Import organization**: Group imports (external, internal, relative)
-
-## Documentation Guidelines
-
-### README.llm.md Files
-
-Each `src` subfolder contains a `README.llm.md` file that documents all modules, classes, exported functions (names, args, return types), components, and gotchas within that subfolder. These files serve as AI-readable documentation to help coding agents understand the codebase structure and functionality.
-
-#### Location and Structure
-
-- **Location**: `README.llm.md` files exist in every `src` subfolder (e.g., `apps/react-app/src/components/README.llm.md`, `packages/package1/src/utils/README.llm.md`)
-- **Purpose**: Describe all modules, classes, exported functions (names, args, return types), components, gotchas, and their important relationships within that subfolder
-- **Format**: Markdown format optimized for AI agents to parse and understand
-- **File Paths**: All module filepaths referenced in `README.llm.md` files must be absolute from the project root (e.g., `apps/react-app/src/App.tsx`, not `./App.tsx` or `App.tsx`)
-
-#### Maintenance Requirements
-
-- **Update on changes**: Whenever you modify, add, or remove modules/classes in a subfolder, you **must** update the corresponding `README.llm.md` file
-- **Keep documentation fresh**: The `README.llm.md` files should accurately reflect the current state of the code in that subfolder
-- **Include all exports**: Document all exported functions, classes, components, types, and interfaces
-- **Describe relationships**: Explain how modules interact with each other and their dependencies
-- **Minimize commit churn**: Only make edits with substantial information changes - do not make minor changes to grammar, word order, etc. to minimize commit changes.
-
-#### When to Update
-
-Update `README.llm.md` files when:
-
-- Adding new modules, classes, or functions to a subfolder
-- Modifying existing exported functions (signatures, behavior, or purpose)
-- Removing modules or functions
-- Changing important relationships between modules
-- Updating type definitions or interfaces
-
-#### Example Structure
-
-A `README.llm.md` file should include:
-
-- Overview of the subfolder's purpose
-- List of all modules/files in the subfolder
-- Description of each module's exports
-- Relationships and dependencies (important) between modules and major libs
-- Simple usage examples where helpful
-
-## Linting Instructions
-
-### Run Linting
-
-```bash
-# Lint all workspaces
-pnpm lint
-
-# Lint specific workspace
-pnpm turbo run lint --filter <workspace-name>
-
-# Or from workspace directory
-cd apps/react-app
-pnpm lint
-```
-
-### Fix Linting Issues
-
-```bash
-# Auto-fix all workspaces
-pnpm lint:fix
-
-# Auto-fix specific workspace
-cd apps/react-app
-pnpm lint:fix
-```
-
-### Linting Requirements
-
-- **Always run linting** before committing: `pnpm lint`
-- **Fix all linting errors** before merging changes
-- **Run linting after modifying files or imports**: `pnpm lint --filter <project_name>`
+**What to include**: subfolder purpose, list of modules and their exports, relationships and dependencies between modules, usage examples where helpful. Use absolute paths from project root (e.g., `apps/react-app/src/App.tsx`). Only make edits with substantial information changes — update child folders before parent folders.
 
 ## Project Structure
 
@@ -261,93 +98,54 @@ mono-template/
 
 ## Workspace Names
 
-When using turbo filters, use these workspace names:
+Use these with turbo filters: `react-app`, `svelte-app`, `astro-app`, `express-service`, `package1`
 
-- `react-app` - React application
-- `svelte-app` - Svelte application
-- `astro-app` - Astro application
-- `express-service` - Express API service
-- `package1` - Shared utility package
+## Key Principles
 
-## Code Quality Checks
+- **Tests are the gate** — If tests pass, the change is likely correct
+- **Small, incremental steps** — Validate after each piece
+- **Outcome over implementation** — Prefer simple, readable solutions
+- **Revert rather than patch** — Don't pile fixes on broken foundations
+- **Run checks proactively** — Don't wait for a human to tell you something is broken
+- **Iterate in conversation** — For complex tasks, clarify architecture and acceptance criteria with the user before generating code; refine incrementally rather than one-shotting
 
-### Knip (Dead Code Detection)
+## Shared Packages
 
-```bash
-# Check all workspaces
-pnpm knip
+Changes to `packages/package1` affect all dependents:
 
-# Check specific workspace
-cd apps/react-app
-pnpm knip
-```
+1. Make changes in `packages/package1/src`
+2. Validate the package: `pnpm build && pnpm test`
+3. Validate dependents from root: `pnpm test && pnpm lint`
 
-## Important Notes
+## Git Strategy
 
-1. **Always work from the correct directory**: Use `cd` to navigate to the workspace you're modifying
-2. **Shared packages**: Changes to `packages/package1` may affect multiple apps - test accordingly
-3. **Type checking**: Run `pnpm typecheck` in workspaces that support it before committing
-4. **Prettier config**: The root `.prettierrc` is automatically discovered by Prettier when formatting files
-5. **VS Code integration**: Format on save is configured - files will auto-format using the shared Prettier config
-6. **Documentation maintenance**: Update `README.llm.md` files in `src` subfolders whenever you modify modules, classes, or functions in that subfolder - modify in order from child folder to parent folder, for help with accurate context and minimizing assumptions.
+- Commit after each logical step passes validation
+- Write meaningful messages (what changed, not how)
+- Tests gate every commit
+- Never commit code that fails `pnpm test` or `pnpm lint`
 
-## Common Workflows
-
-### Making Changes to a Shared Package
+## Common Commands
 
 ```bash
-# 1. Make changes to packages/package1/src
-# 2. Build the package
-cd packages/package1
-pnpm build
+# Root (all workspaces)
+pnpm build                  # Build all
+pnpm dev                    # Dev mode all
+pnpm watch                  # Dev mode with file watching
+pnpm test                   # Run all tests
+pnpm lint                   # Lint all
+pnpm format                 # Format all
+pnpm knip                   # Dead code detection
 
-# 3. Test the package
-pnpm test
-
-# 4. Test dependent apps
-cd ../../apps/react-app
-pnpm test
+# Targeted (fast inner loop)
+pnpm turbo run test --filter <workspace-name>   # Test one workspace
+cd <workspace> && pnpm vitest run -t "<name>"   # Run single test by name
+cd <workspace> && pnpm test:watch               # Tests in watch mode
+cd <workspace> && pnpm knip                     # Dead code in one workspace
 ```
-
-### Adding a New Feature to an App
-
-```bash
-# 1. Navigate to app directory
-cd apps/react-app
-
-# 2. Make code changes
-# 3. Format code
-pnpm format
-
-# 4. Run linting
-pnpm lint
-
-# 5. Run tests
-pnpm test
-
-# 6. Build to verify
-pnpm build
-```
-
-### Before Committing
-
-Always run these commands before committing:
-
-```bash
-# From root
-pnpm format:check    # Verify formatting
-pnpm lint            # Check linting
-pnpm test            # Run all tests
-```
-
-**Also ensure**:
-
-- All `README.llm.md` files in modified `src` subfolders are updated to reflect code changes
-- Documentation accurately describes the current state of modules and their exports
 
 ## Troubleshooting
 
-- **Prettier not working in VS Code**: Reload window (`Ctrl+Shift+P` → "Developer: Reload Window")
-- **Tests failing**: Check that dependencies are installed (`pnpm install`)
-- **Build errors**: Ensure TypeScript compiles (`pnpm build` from root)
-- **Import errors**: Verify workspace dependencies in `package.json` files
+- **Prettier not working**: Reload VS Code window
+- **Tests failing**: Run `pnpm install`
+- **Build errors**: Run `pnpm build` to check TypeScript
+- **Import errors**: Verify workspace dependencies in `package.json`
