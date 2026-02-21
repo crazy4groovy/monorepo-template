@@ -1,61 +1,86 @@
 # Express Service Source
 
-Main source code for the Express API service.
+Main source code for the Express API service. Uses **MVC architecture** with controllers, services, and routes separated.
+
+## Architecture
+
+```
+src/
+├── app.ts              # App factory (createApp)
+├── index.ts            # Entry point, starts server
+├── controllers/        # HTTP handlers (request/response)
+├── services/           # Business logic
+├── routes/             # Route definitions
+├── types/              # Shared type definitions
+└── test/               # Test setup
+```
 
 ## Modules
 
+### `services/express-service/src/app.ts`
+
+Creates the Express application instance. Call `createApp()` to get a configured app (used by `index.ts` and tests).
+
+**Exports**: `createApp(): express.Application`
+
+**Dependencies**: dotenv, firebase-auth/admin (initAdminAuth), routes
+
 ### `services/express-service/src/index.ts`
 
-Express application entry point that sets up routes and starts the server.
+Entry point. Creates app, starts HTTP server, handles graceful shutdown (SIGTERM, SIGINT).
 
-**Exports**: None (side effects only - starts server)
+**Exports**: None (side effects only)
 
-**Functions**:
+### `services/express-service/src/controllers/`
 
-- Creates Express app instance
-- Configures JSON middleware
-- Defines routes
-- Starts HTTP server
-- Handles graceful shutdown
+HTTP request handlers. Controllers receive `req`/`res`, call services for business logic, and send responses.
 
-**Routes**:
+- **home.controller.ts**: `getHome`, `getHealth` — root and health endpoints
+- **auth.controller.ts**: `getProtected` — Firebase-protected route
+- **todos.controller.ts**: `list`, `getOne`, `create`, `update`, `remove` — todo CRUD
 
-- `GET /` - Returns welcome message with app info and package1 utility examples
-  - Response: `{ message: string, version: string, example: { capitalize: string, add: number, currency: string } }`
-- `GET /health` - Health check endpoint
-  - Response: `{ status: 'ok' }`
+### `services/express-service/src/services/`
 
-**Environment Variables**:
+Business logic layer. Services are pure functions (or modules) with no HTTP concerns.
 
-- `PORT` - Server port (default: 3000)
-- `APP_NAME` - Application name (default: 'Express Service')
-- `API_VERSION` - API version (default: 'v1')
+- **todos.service.ts**: In-memory todo CRUD — `findAll`, `findById`, `create`, `update`, `remove`, `reset` (test helper)
 
-**Dependencies**:
+### `services/express-service/src/routes/`
 
-- `express` - Express web framework
-- `dotenv/config` - Loads environment variables
-- `package1` - Uses `add`, `capitalize`, `formatCurrency` utilities
+Route definitions. Maps HTTP methods/paths to controllers.
 
-**Server Lifecycle**:
+- **index.ts**: Main router — `/`, `/health`, `/api/protected`, `/api/todos`
+- **todos.routes.ts**: Todo routes — `GET/POST /api/todos`, `GET/PATCH/DELETE /api/todos/:id`
 
-- Listens on configured PORT
-- Handles `SIGTERM` signal for graceful shutdown
-- Handles `SIGINT` signal (Ctrl+C) for graceful shutdown
+### `services/express-service/src/types/`
 
-**Gotchas**:
+Shared TypeScript types.
 
-- Uses `dotenv/config` import to load environment variables automatically
-- Server instance is stored for graceful shutdown handling
-- Health check endpoint returns simple status object
-- Root endpoint demonstrates package1 utilities in response
+- **todo.ts**: `Todo`, `CreateTodoInput`, `UpdateTodoInput`
 
-### `services/express-service/src/test/setup.ts`
+## Routes
 
-Test configuration - see `services/express-service/src/test/README.llm.md` for details.
+| Method | Path | Controller | Description |
+|--------|------|------------|-------------|
+| GET | / | home | Welcome message + package1 examples |
+| GET | /health | home | Health check |
+| GET | /api/protected | auth | Firebase-protected (requires auth) |
+| GET | /api/todos | todos | List all todos |
+| GET | /api/todos/:id | todos | Get one todo |
+| POST | /api/todos | todos | Create todo |
+| PATCH | /api/todos/:id | todos | Update todo |
+| DELETE | /api/todos/:id | todos | Delete todo |
+
+## Environment Variables
+
+- `PORT` — Server port (default: 3000)
+- `APP_NAME` — Application name (default: 'Express Service')
+- `API_VERSION` — API version (default: 'v1')
 
 ## Relationships
 
-- Imports utilities from `package1` workspace package
-- Uses Express middleware for JSON parsing
-- Integrates with package1 for utility functions in API responses
+- **Controllers** → call **Services** for business logic
+- **Routes** → wire paths to **Controllers**
+- **app.ts** → mounts **Routes**, initializes Firebase Admin Auth
+- Uses `package1` for utilities (add, capitalize, formatCurrency)
+- Uses `firebase-auth/admin` for protected routes
