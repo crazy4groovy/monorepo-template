@@ -46,9 +46,7 @@ describe('Express Service', () => {
 
     describe('POST /api/todos', () => {
       it('should create a todo', async () => {
-        const response = await request(app)
-          .post('/api/todos')
-          .send({ title: 'Buy milk' })
+        const response = await request(app).post('/api/todos').send({ title: 'Buy milk' })
 
         expect(response.status).toBe(201)
         expect(response.body).toMatchObject({
@@ -60,9 +58,7 @@ describe('Express Service', () => {
       })
 
       it('should reject empty title', async () => {
-        const response = await request(app)
-          .post('/api/todos')
-          .send({ title: '' })
+        const response = await request(app).post('/api/todos').send({ title: '' })
 
         expect(response.status).toBe(400)
         expect(response.body).toHaveProperty('error')
@@ -71,9 +67,7 @@ describe('Express Service', () => {
 
     describe('GET /api/todos/:id', () => {
       it('should return a todo by id', async () => {
-        const createRes = await request(app)
-          .post('/api/todos')
-          .send({ title: 'Test todo' })
+        const createRes = await request(app).post('/api/todos').send({ title: 'Test todo' })
         const { id } = createRes.body
 
         const response = await request(app).get(`/api/todos/${id}`)
@@ -96,9 +90,7 @@ describe('Express Service', () => {
 
     describe('PATCH /api/todos/:id', () => {
       it('should update a todo', async () => {
-        const createRes = await request(app)
-          .post('/api/todos')
-          .send({ title: 'Original' })
+        const createRes = await request(app).post('/api/todos').send({ title: 'Original' })
         const { id } = createRes.body
 
         const response = await request(app)
@@ -116,9 +108,7 @@ describe('Express Service', () => {
 
     describe('DELETE /api/todos/:id', () => {
       it('should delete a todo', async () => {
-        const createRes = await request(app)
-          .post('/api/todos')
-          .send({ title: 'To delete' })
+        const createRes = await request(app).post('/api/todos').send({ title: 'To delete' })
         const { id } = createRes.body
 
         const deleteRes = await request(app).delete(`/api/todos/${id}`)

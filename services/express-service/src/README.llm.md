@@ -60,16 +60,16 @@ Shared TypeScript types.
 
 ## Routes
 
-| Method | Path | Controller | Description |
-|--------|------|------------|-------------|
-| GET | / | home | Welcome message + package1 examples |
-| GET | /health | home | Health check |
-| GET | /api/protected | auth | Firebase-protected (requires auth) |
-| GET | /api/todos | todos | List all todos |
-| GET | /api/todos/:id | todos | Get one todo |
-| POST | /api/todos | todos | Create todo |
-| PATCH | /api/todos/:id | todos | Update todo |
-| DELETE | /api/todos/:id | todos | Delete todo |
+| Method | Path           | Controller | Description                         |
+| ------ | -------------- | ---------- | ----------------------------------- |
+| GET    | /              | home       | Welcome message + package1 examples |
+| GET    | /health        | home       | Health check                        |
+| GET    | /api/protected | auth       | Firebase-protected (requires auth)  |
+| GET    | /api/todos     | todos      | List all todos                      |
+| GET    | /api/todos/:id | todos      | Get one todo                        |
+| POST   | /api/todos     | todos      | Create todo                         |
+| PATCH  | /api/todos/:id | todos      | Update todo                         |
+| DELETE | /api/todos/:id | todos      | Delete todo                         |
 
 ## Environment Variables
 

@@ -7,7 +7,7 @@ export function list(_req: Request, res: Response): void {
 }
 
 export function getOne(req: Request, res: Response): void {
-  const todo = todosService.findById(req.params.id)
+  const todo = todosService.findById(req.params.id as string)
   if (!todo) {
     res.status(404).json({ error: 'Todo not found' })
     return
@@ -26,7 +26,7 @@ export function create(req: Request, res: Response): void {
 }
 
 export function update(req: Request, res: Response): void {
-  const todo = todosService.update(req.params.id, req.body)
+  const todo = todosService.update(req.params.id as string, req.body)
   if (!todo) {
     res.status(404).json({ error: 'Todo not found' })
     return
@@ -35,7 +35,7 @@ export function update(req: Request, res: Response): void {
 }
 
 export function remove(req: Request, res: Response): void {
-  const deleted = todosService.remove(req.params.id)
+  const deleted = todosService.remove(req.params.id as string)
   if (!deleted) {
     res.status(404).json({ error: 'Todo not found' })
     return

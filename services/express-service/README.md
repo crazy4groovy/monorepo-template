@@ -16,16 +16,16 @@ src/
 
 ## API
 
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | / | Welcome + package1 examples |
-| GET | /health | Health check |
-| GET | /api/protected | Firebase-protected (auth required) |
-| GET | /api/todos | List todos |
-| GET | /api/todos/:id | Get todo |
-| POST | /api/todos | Create todo `{ "title": "..." }` |
-| PATCH | /api/todos/:id | Update todo `{ "title"?, "completed"? }` |
-| DELETE | /api/todos/:id | Delete todo |
+| Method | Path           | Description                              |
+| ------ | -------------- | ---------------------------------------- |
+| GET    | /              | Welcome + package1 examples              |
+| GET    | /health        | Health check                             |
+| GET    | /api/protected | Firebase-protected (auth required)       |
+| GET    | /api/todos     | List todos                               |
+| GET    | /api/todos/:id | Get todo                                 |
+| POST   | /api/todos     | Create todo `{ "title": "..." }`         |
+| PATCH  | /api/todos/:id | Update todo `{ "title"?, "completed"? }` |
+| DELETE | /api/todos/:id | Delete todo                              |
 
 ## Setup
 

@@ -30,7 +30,7 @@
     },
     "analyze": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**"]
+      "outputs": ["dist/**", "build/**"]
     }
   }
 }
