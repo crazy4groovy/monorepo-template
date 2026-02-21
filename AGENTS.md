@@ -98,7 +98,7 @@ mono-template/
 
 ## Workspace Names
 
-Use these with turbo filters: `react-app`, `svelte-app`, `astro-app`, `express-service`, `package1`
+Use these with turbo filters: `react-app`, `svelte-app`, `astro-app`, `express-service`, `package1`, `firebase-auth`
 
 ## Key Principles
 

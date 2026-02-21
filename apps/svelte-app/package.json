@@ -21,6 +21,7 @@
     "analyze": "vite build"
   },
   "dependencies": {
+    "firebase-auth": "workspace:*",
     "package1": "workspace:*"
   },
   "devDependencies": {

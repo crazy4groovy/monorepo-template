@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro'
+import AuthStatus from '../components/AuthStatus'
 import { add, capitalize, formatCurrency } from 'package1'
 
 const appName = import.meta.env.PUBLIC_APP_NAME || 'Astro App'
@@ -11,6 +12,10 @@ const env = import.meta.env.MODE || 'development'
   <main>
     <h1>{appName}</h1>
     <p>Welcome to the Astro app in the monorepo!</p>
+    <div class="auth-box">
+      <p><strong>Firebase Auth</strong></p>
+      <AuthStatus client:only="react" />
+    </div>
     <div class="info-box">
       <p><strong>Environment Variables:</strong></p>
       <ul>
@@ -34,6 +39,14 @@ const env = import.meta.env.MODE || 'development'
       system-ui,
       -apple-system,
       sans-serif;
+  }
+
+  .auth-box {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #eef6ff;
+    border-radius: 4px;
+    border: 1px solid #b3d4fc;
   }
 
   .info-box {

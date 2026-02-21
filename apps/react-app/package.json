@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@tanstack/react-router": "~1.139.1",
+    "firebase-auth": "workspace:*",
     "package1": "workspace:*",
     "react": "~19.2.0",
     "react-dom": "~19.2.0"

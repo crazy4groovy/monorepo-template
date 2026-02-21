@@ -24,6 +24,10 @@
       "name": "📚 Package1",
       "path": "./packages/package1",
     },
+    {
+      "name": "📚 Firebase Auth Package",
+      "path": "./packages/firebase-auth",
+    },
   ],
   "settings": {
     "files.exclude": {

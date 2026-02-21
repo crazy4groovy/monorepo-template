@@ -1,0 +1,86 @@
+{
+  "name": "firebase-auth",
+  "version": "0.1.0",
+  "description": "Shared Firebase Authentication package for client (React, Svelte, Astro) and server (Express) - plug in with env config",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint . --ext ts,tsx --fix",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,scss,md,astro,svelte}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,css,scss,md,astro,svelte}\"",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "knip": "knip"
+  },
+  "exports": {
+    "./client": {
+      "development": {
+        "types": "./src/client/index.ts",
+        "default": "./src/client/index.ts"
+      },
+      "types": "./dist/client/index.d.ts",
+      "default": "./dist/client/index.js"
+    },
+    "./client/react": {
+      "development": {
+        "types": "./src/client/react.ts",
+        "default": "./src/client/react.ts"
+      },
+      "types": "./dist/client/react.d.ts",
+      "default": "./dist/client/react.js"
+    },
+    "./client/svelte": {
+      "development": {
+        "types": "./src/client/svelte.ts",
+        "default": "./src/client/svelte.ts"
+      },
+      "types": "./dist/client/svelte.d.ts",
+      "default": "./dist/client/svelte.js"
+    },
+    "./admin": {
+      "development": {
+        "types": "./src/admin/index.ts",
+        "default": "./src/admin/index.ts"
+      },
+      "types": "./dist/admin/index.d.ts",
+      "default": "./dist/admin/index.js"
+    }
+  },
+  "dependencies": {
+    "firebase": "^11.0.0",
+    "firebase-admin": "^13.0.0"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "svelte": ">=4.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "svelte": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.5",
+    "@types/react": "^19.0.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "@types/node": "^24.10.1",
+    "@typescript-eslint/eslint-plugin": "^8.47.0",
+    "@typescript-eslint/parser": "^8.47.0",
+    "@vitest/coverage-v8": "^1.6.0",
+    "eslint": "^8.57.1",
+    "express": "^5.0.0",
+    "knip": "^5.70.1",
+    "prettier": "^3.6.2",
+    "react": "^19.0.0",
+    "svelte": "^5.0.0",
+    "typescript": "^5.9.3",
+    "vitest": "^1.6.1"
+  }
+}

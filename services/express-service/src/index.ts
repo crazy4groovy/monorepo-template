@@ -1,6 +1,9 @@
 import 'dotenv/config'
 import express from 'express'
 import { add, capitalize, formatCurrency } from 'package1'
+import { type AuthRequest, authMiddleware, initAdminAuth } from 'firebase-auth/admin'
+
+initAdminAuth()
 
 const app = express()
 const PORT = process.env.PORT || 3000
@@ -23,6 +26,11 @@ app.get('/', (req, res) => {
 
 app.get('/health', (req, res) => {
   res.json({ status: 'ok' })
+})
+
+app.get('/api/protected', authMiddleware, (req, res) => {
+  const user = (req as AuthRequest).user
+  res.json({ uid: user?.uid })
 })
 
 const server = app.listen(PORT, () => {

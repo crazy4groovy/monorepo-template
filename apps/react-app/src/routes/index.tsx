@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { add, capitalize, formatCurrency } from 'package1'
+import AuthStatus from '../components/AuthStatus'
 
 export const Route = createFileRoute('/')({
   component: () => {
@@ -11,6 +12,18 @@ export const Route = createFileRoute('/')({
       <>
         <h1>{appName}</h1>
         <p>Welcome to the React app in the monorepo!</p>
+        <div
+          style={{
+            marginTop: '1rem',
+            padding: '1rem',
+            background: '#eef6ff',
+            borderRadius: '4px',
+            border: '1px solid #b3d4fc',
+          }}
+        >
+          <p style={{ marginTop: 0, fontWeight: 'bold' }}>Firebase Auth</p>
+          <AuthStatus />
+        </div>
         <div
           style={{
             marginTop: '1rem',

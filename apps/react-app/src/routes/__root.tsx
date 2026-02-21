@@ -1,4 +1,5 @@
 import { Link, Outlet, createRootRoute } from '@tanstack/react-router'
+import { AuthNavStatus } from '../components/AuthNavStatus'
 
 export const Route = createRootRoute({
   component: () => (
@@ -34,6 +35,15 @@ export const Route = createRootRoute({
         >
           About
         </Link>
+        <span
+          style={{
+            float: 'right',
+            fontSize: '0.9rem',
+            color: '#666',
+          }}
+        >
+          <AuthNavStatus />
+        </span>
       </nav>
       <Outlet />
     </div>

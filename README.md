@@ -26,7 +26,8 @@ mono-template/
 │   ├── svelte-app/         # Svelte application (Vite + TypeScript + Svelte Testing Library)
 │   └── astro-app/          # Astro application (Astro + React + TypeScript + Testing Library)
 ├── packages/
-│   └── package1/           # Shared utility package (TypeScript)
+│   ├── firebase-auth/     # Firebase Authentication (client + admin)
+│   └── package1/          # Shared utility package (TypeScript)
 ├── services/
 │   └── express-service/    # Express API service (TypeScript + Express)
 ├── package.json            # Root package configuration

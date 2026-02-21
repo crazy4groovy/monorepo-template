@@ -1,5 +1,10 @@
 <script lang="ts">
   import favicon from '$lib/assets/favicon.svg'
+  import { FIREBASE_UNCONFIGURED_LABEL, getFirebaseConfig } from 'firebase-auth/client'
+  import { authLoading, authStore, initAuthForSvelte } from 'firebase-auth/client/svelte'
+
+  initAuthForSvelte()
+  const firebaseConfigured = !!getFirebaseConfig()
 
   let { children } = $props()
 </script>
@@ -40,6 +45,17 @@
     >
       About
     </a>
+    <span style="float: right; font-size: 0.9rem; color: #666">
+      {#if !firebaseConfigured}
+        {FIREBASE_UNCONFIGURED_LABEL}
+      {:else if $authLoading}
+        Checking auth...
+      {:else if $authStore}
+        {$authStore.email ?? 'Signed in'}
+      {:else}
+        Not signed in
+      {/if}
+    </span>
   </nav>
   {@render children()}
 </div>

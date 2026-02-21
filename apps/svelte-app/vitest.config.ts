@@ -18,5 +18,6 @@ export default defineConfig({
     restoreMocks: true,
     clearMocks: true,
     include: ['src/**/*.{test,spec}.{js,ts}'],
+    passWithNoTests: true,
   },
 })

@@ -1,8 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
+import { initAuth } from 'firebase-auth/client'
 
 // Import the generated route tree
+initAuth()
 import { routeTree } from './routeTree.gen'
 
 // Create a new router instance
