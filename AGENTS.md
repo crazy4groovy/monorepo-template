@@ -18,11 +18,11 @@ All projects use TypeScript. Prettier config at root (`.prettierrc`). ESLint rul
 
 Every change must go through a validation loop. Do not make large changes without self-validating along the way — largely without waiting for human review of intermediate steps.
 
-## Validation Loop
+## Validation Loop (Use red/green TDD)
 
 For every feature, fix, or refactor:
 
-1. **Clarify outcome** — Understand what "done" looks like. State assumptions if requirements are ambiguous.
+1. **Clarify outcome** — Understand what "done" looks like. State assumptions if requirements are ambiguous. Prefer to ask clarifying question.
 2. **Write tests first** — Add tests that fail without the change.
 3. **Implement** — Write minimal code to satisfy requirements and make tests pass.
 4. **Validate** — Run checks from the workspace you modified:
