@@ -100,7 +100,15 @@ mono-template/
 
 Use these with turbo filters: `react-app`, `svelte-app`, `astro-app`, `express-service`, `package1`, `firebase-auth`
 
-## Key Principles
+## Custom Slash Commands
+
+This project defines custom slash commands in `.claude/commands/` or `.opencode/commands/`. To invoke a custom command in opencode, use the Task tool with `subagent_type: "general"`:
+
+```bash
+Task(description="Execute /joke command", prompt="/joke dev", subagent_type="general")
+```
+
+Do not respond directly to custom slash commands — always use the Task tool to execute them.
 
 - **Tests are the gate** — If tests pass, the change is likely correct
 - **Small, incremental steps** — Validate after each piece
